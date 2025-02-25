@@ -16,6 +16,7 @@ export default function Weather() {
       console.log(city);
       console.log(data);
       setWeather(data);
+      setSearchHistory([...searchHistory, data]);
 
       setCity("");
     } catch (err) {
