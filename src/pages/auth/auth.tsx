@@ -1,22 +1,37 @@
 import { useState } from "react";
 import "./auth.css";
+import { auth } from "../../api/api";
 
 export default function Auth() {
   const [isSignUpMode, setIsSignUpMode] = useState(false);
-  const [loginUsername, setLoginUsername] = useState("");
-  const [loginPassword, setLoginPassword] = useState("");
-  const [signupUsername, setSignupUsername] = useState("");
-  const [signupEmail, setSignupEmail] = useState("");
-  const [signupPassword, setSignupPassword] = useState("");
+  const [loginUsername, setLoginUsername] = useState("sianami123@gmail.com");
+  const [loginPassword, setLoginPassword] = useState("12345678");
+  const [signupUsername, setSignupUsername] = useState("sianami123");
+  const [signupEmail, setSignupEmail] = useState("sianami123@gmail.com");
+  const [signupPassword, setSignupPassword] = useState("12345678");
 
   async function handleLogin(e: React.FormEvent) {
     e.preventDefault();
-    console.log("Login:", { loginUsername, loginPassword });
+    const response = await auth.login(loginUsername, loginPassword);
+    console.log(response);
+    if (response.accessToken) {
+      localStorage.setItem("token", response.accessToken);
+      //   window.location.href = "/";
+    }
   }
 
   async function handleSignup(e: React.FormEvent) {
     e.preventDefault();
-    console.log("Signup:", { signupUsername, signupEmail, signupPassword });
+    const response = await auth.signup(
+      signupUsername,
+      signupEmail,
+      signupPassword
+    );
+    console.log(response);
+    if (response.accessToken) {
+      localStorage.setItem("token", response.accessToken);
+      //   window.location.href = "/";
+    }
   }
 
   return (

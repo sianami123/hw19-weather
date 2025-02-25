@@ -1,9 +1,14 @@
 import "./App.css";
 import Auth from "./pages/auth/auth";
+import { Routes, Route } from "react-router-dom";
+import Weather from "./pages/weather/weather";
 function App() {
   return (
     <div>
-      <Auth />
+      <Routes>
+        <Route path="/" element={<Weather />} />
+        <Route path="/auth" element={<Auth />} />
+      </Routes>
     </div>
   );
 }

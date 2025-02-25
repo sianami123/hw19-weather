@@ -2,30 +2,51 @@ import axios from "axios";
 
 const api_key = "siacontacts";
 
-const api = axios.create({
+const authApi = axios.create({
   baseURL: "http://api.alikooshesh.ir:3000",
 });
 
-api.interceptors.request.use((config) => {
-  config.headers.api_key = `Bearer ${api_key}`;
+authApi.interceptors.request.use((config) => {
+  config.headers.api_key = api_key;
   return config;
 });
 
 export const auth = {
-  login: async (username: string, password: string) => {
-    const response = await api.post("/api/users/login", { username, password });
-    return response.data;
-  },
-  signup: async (username: string, email: string, password: string) => {
-    const response = await api.post("/api/users/register", {
-      username,
+  login: async (email: string, password: string) => {
+    const response = await authApi.post("/api/users/login", {
       email,
       password,
     });
     return response.data;
   },
+  signup: async (username: string, email: string, password: string) => {
+    const response = await authApi.post("/api/users/register", {
+      email,
+      username,
+      password,
+    });
+    return response.data;
+  },
   logout: async () => {
-    const response = await api.post("/api/users/logout");
+    const response = await authApi.post("/api/users/logout");
+    return response.data;
+  },
+};
+
+const API_KEY = "e0bf214e3b6012037fc7c42d5c34e640";
+const BASE_URL = "https://api.openweathermap.org/data/2.5";
+
+const weatherApi = axios.create({
+  baseURL: BASE_URL,
+  params: {
+    appid: API_KEY,
+    units: "metric",
+  },
+});
+
+export const weather = {
+  getWeatherByCity: async (city: string) => {
+    const response = await weatherApi.get("/weather", { params: { q: city } });
     return response.data;
   },
 };
