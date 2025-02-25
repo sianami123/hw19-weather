@@ -1,7 +1,5 @@
-import { useState, useEffect } from "react";
-import { weather } from "../../api/api";
-
-const MAX_HISTORY = 4; // Maximum number of cities to show in history
+import { useState } from "react";
+import { weatherApi } from "../../api/api";
 
 export default function Weather() {
   const [city, setCity] = useState("");
@@ -11,9 +9,12 @@ export default function Weather() {
 
   const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault();
+
     try {
       setError(null);
-      const data = await weather.getWeatherByCity(city);
+      const data = await weatherApi.getWeatherByCity(city);
+      console.log(city);
+      console.log(data);
       setWeather(data);
 
       setCity("");

@@ -36,7 +36,7 @@ export const auth = {
 const API_KEY = "e0bf214e3b6012037fc7c42d5c34e640";
 const BASE_URL = "https://api.openweathermap.org/data/2.5";
 
-const weatherApi = axios.create({
+const weather = axios.create({
   baseURL: BASE_URL,
   params: {
     appid: API_KEY,
@@ -44,9 +44,9 @@ const weatherApi = axios.create({
   },
 });
 
-export const weather = {
+export const weatherApi = {
   getWeatherByCity: async (city: string) => {
-    const response = await weatherApi.get("/weather", { params: { q: city } });
+    const response = await weather.get("/weather", { params: { q: city } });
     return response.data;
   },
 };
