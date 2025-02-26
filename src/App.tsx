@@ -7,7 +7,7 @@ function App() {
     <div>
       <Routes>
         <Route path="/" element={<Weather />} />
-        <Route path="/auth" element={<Auth />} />
+        <Route path="/login" element={<Auth />} />
       </Routes>
     </div>
   );
