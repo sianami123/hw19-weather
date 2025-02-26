@@ -54,13 +54,13 @@ export default function Weather() {
     });
   };
 
-  // useEffect(() => {
-  //   fetch("http://ip-api.com/json/")
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       handleSearch(data.city);
-  //     });
-  // }, []);
+  useEffect(() => {
+    fetch("http://ip-api.com/json/")
+      .then((res) => res.json())
+      .then((data) => {
+        handleSearch(data.city);
+      });
+  }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-400 to-blue-800 py-6 px-4">
@@ -79,7 +79,7 @@ export default function Weather() {
         <form
           onSubmit={(e) => {
             e.preventDefault();
-            handleSearch(e);
+            handleSearch(city);
           }}
           className="flex gap-2 mb-8 w-full"
         >
