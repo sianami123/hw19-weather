@@ -14,12 +14,25 @@ export default function Weather() {
       setError(null);
       const data = await weatherApi.getWeatherByCity(city);
       setWeather(data);
-      setSearchHistory([...searchHistory, data]);
+      addToHistory(data);
       setCity("");
     } catch (err) {
       setError("City not found. Please try again.");
       setWeather(null);
     }
+  };
+
+  const addToHistory = (data: any) => {
+    if (searchHistory.find((item) => item.name === data.name)) {
+      return;
+    }
+    setSearchHistory([...searchHistory, data]);
+  };
+
+  const removeFromHistory = (historyItem: any) => {
+    setSearchHistory(
+      searchHistory.filter((item) => item.name !== historyItem.name)
+    );
   };
 
   return (
@@ -79,7 +92,15 @@ export default function Weather() {
                 key={item.name}
                 className="bg-white/80 backdrop-blur-md text-gray-800 p-4 rounded-xl shadow-md"
               >
-                <h3 className="text-xl font-semibold mb-2">{item.name}</h3>
+                <div className="flex items-center justify-between">
+                  <h3 className="text-xl font-semibold mb-2">{item.name}</h3>
+                  <button
+                    onClick={() => removeFromHistory(item)}
+                    className="bg-red-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-red-600 transition duration-300"
+                  >
+                    Delete
+                  </button>
+                </div>
                 <p className="mb-1">Country: {item.sys.country}</p>
                 <p className="mb-1">
                   Temperature: {Math.round(item.main.temp)}°C
