@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { weatherApi } from "../../api/api";
 import { IoIosAddCircle, IoIosRemoveCircle } from "react-icons/io";
 import { WiHumidity, WiStrongWind, WiBarometer } from "react-icons/wi";
@@ -53,15 +53,6 @@ export default function Weather() {
       minute: "2-digit",
     });
   };
-
-  useEffect(() => {
-    fetch("http://ip-api.com/json/")
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("data from ip-api", data);
-        handleSearch(data.city);
-      });
-  }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-400 to-blue-800 py-6 px-4">
