@@ -49,4 +49,8 @@ export const weatherApi = {
     const response = await weather.get("/weather", { params: { q: city } });
     return response.data;
   },
+  getForecastByCity: async (city: string) => {
+    const response = await weather.get("/forecast", { params: { q: city } });
+    return response.data;
+  },
 };
