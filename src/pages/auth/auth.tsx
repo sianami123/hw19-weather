@@ -30,7 +30,7 @@ export default function Auth() {
     console.log(response);
     if (response.accessToken) {
       localStorage.setItem("token", response.accessToken);
-      //   window.location.href = "/";
+      window.location.href = "/";
     }
   }
 
