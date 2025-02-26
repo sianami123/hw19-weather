@@ -55,7 +55,7 @@ export default function Weather() {
   };
 
   useEffect(() => {
-    fetch("http://ip-api.com/json/")
+    fetch("https://ip-api.com/json/")
       .then((res) => res.json())
       .then((data) => {
         console.log("data from ip-api", data);
