@@ -46,6 +46,7 @@ const weather = axios.create({
 
 export const weatherApi = {
   getWeatherByCity: async (city: string) => {
+    console.log("url", `${BASE_URL}/weather?q=${city}&appid=${API_KEY}`);
     const response = await weather.get("/weather", { params: { q: city } });
     return response.data;
   },

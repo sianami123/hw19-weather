@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { weatherApi } from "../../api/api";
 import { IoIosAddCircle, IoIosRemoveCircle } from "react-icons/io";
 import { WiHumidity, WiStrongWind, WiBarometer } from "react-icons/wi";
@@ -10,9 +10,7 @@ export default function Weather() {
   const [error, setError] = useState<string | null>(null);
   const [searchHistory, setSearchHistory] = useState<any[]>([]);
 
-  const handleSearch = async (e: React.FormEvent) => {
-    e.preventDefault();
-
+  const handleSearch = async (city: string) => {
     try {
       setError(null);
       const data = await weatherApi.getWeatherByCity(city);
@@ -56,6 +54,14 @@ export default function Weather() {
     });
   };
 
+  // useEffect(() => {
+  //   fetch("http://ip-api.com/json/")
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       handleSearch(data.city);
+  //     });
+  // }, []);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-400 to-blue-800 py-6 px-4">
       <div className="max-w-6xl mx-auto flex flex-col items-center">
@@ -70,7 +76,13 @@ export default function Weather() {
           </button>
         </div>
 
-        <form onSubmit={handleSearch} className="flex gap-2 mb-8 w-full">
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleSearch(e);
+          }}
+          className="flex gap-2 mb-8 w-full"
+        >
           <div className="flex gap-2">
             <input
               type="text"
