@@ -1,6 +1,6 @@
 import "./App.css";
 import Auth from "./pages/auth/auth";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Weather from "./pages/weather/weather";
 
 function App() {
