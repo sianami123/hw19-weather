@@ -45,7 +45,6 @@ export default function Weather() {
     );
   };
 
-  // Function to calculate local time
   const getLocalTime = (timezoneOffset: number) => {
     const localTime = new Date(new Date().getTime() + timezoneOffset * 1000);
     return localTime.toLocaleTimeString("en-US", {

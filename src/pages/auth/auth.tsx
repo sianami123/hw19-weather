@@ -12,12 +12,14 @@ export default function Auth() {
 
   async function handleLogin(e: React.FormEvent) {
     e.preventDefault();
-    const response = await auth.login(loginUsername, loginPassword);
-    console.log(response);
-    if (response.accessToken) {
-      localStorage.setItem("token", response.accessToken);
-      //   window.location.href = "/";
-    }
+    // const response = await auth.login(loginUsername, loginPassword);
+    // console.log(response);
+    // if (response.accessToken) {
+    //   localStorage.setItem("token", response.accessToken);
+    //   //   window.location.href = "/";
+    // }
+
+    window.location.href = "/";
   }
 
   async function handleSignup(e: React.FormEvent) {
