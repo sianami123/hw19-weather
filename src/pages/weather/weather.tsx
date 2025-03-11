@@ -55,11 +55,13 @@ export default function Weather() {
   };
 
   useEffect(() => {
-    fetch("https://ip-api.com/json/")
+    fetch("https://api.ipregistry.co/?key=tryout&pretty=true")
       .then((res) => res.json())
       .then((data) => {
-        console.log("data from ip-api", data);
-        handleSearch(data.city);
+        console.log("data from ip-api", data.location.city);
+        if (data.location.city) {
+          handleSearch(data.location.city);
+        }
       });
   }, []);
 
